@@ -14,4 +14,18 @@ sudo pip3 install pywinrm
 #nicht bekannte/falsche Domains/realms löschen
 
 sudo nano /etc/krb5.conf
+
+Windws-GPOs:
+services:
+autmatic start winrm
+
+pc/win-comp/winrm/winrm-service/
+- kerberos-auth-deactivate allow > deactivate
+- unencrypted > OK
+
+firewall:
+allow 
+
+
+
   
