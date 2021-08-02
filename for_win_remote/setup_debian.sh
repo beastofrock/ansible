@@ -39,6 +39,19 @@ ansible_transport=kerberos
 ansible_winrm_scheme=http
 ansible_winrm_validation=ignore
 
+.tmux.conf
+# remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# split panes using | and -
+bind | split-window -h
+bind + split-window -v
+unbind '"'
+unbind %
+
+set -g mouse on
 
 
 
