@@ -11,7 +11,7 @@ apt install ansible libkrb5-dev krb5-user python3-pip
 
 sudo pip3 install pywinrm
 
-#nicht bekannte/falsche Domains/realms löschen
+-delete wrong realms/domains etc.
 
 sudo nano /etc/krb5.conf
 
@@ -24,7 +24,22 @@ pc/win-comp/winrm/winrm-service/
 - unencrypted > OK
 
 firewall:
-allow 
+allow 5985
+
+/etc/ansible/hosts
+
+[group]
+t800.skynet.de
+[group:vars]
+ansible_user=ansible@SKYNET.DE
+ansible_password=password
+ansible_connection=winrm
+ansible_port=5985
+ansible_transport=kerberos
+ansible_winrm_scheme=http
+ansible_winrm_validation=ignore
+
+
 
 
 
