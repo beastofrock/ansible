@@ -8,5 +8,6 @@ cd ~
 git clone https://github.com/beastofrock/ansible
 
 apt install ansible libkrb5-dev krb5-user
-echo'
+
+sudo pip3 install pywinrm
 
