@@ -46,7 +46,9 @@ powershell:
 Set-Service -Name winrm -StartupType automatic
 start-service winrm
 Enable-WSManCredSSP -Role Server -Force
-netsh advfirewall firewall add rule name="__remote_management" dir=in action=allow protocol=TCP localport=5985
+get-netconnectionprofile
+set-netconnectionprofile -name Netzwerk -profile private
+New-NetFirewallRule -DisplayName '__remote_managent' -LocalPort 5985 -Action Allow -Profile 'Private' -Protocol TCP -Direction Inbound
 
 [win_wg:vars]
 ansible_user=ansible
