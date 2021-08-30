@@ -28,6 +28,8 @@ allow 5985
 
 /etc/ansible/hosts
 
+#### Windows Domain ####
+
 [group]
 t800.skynet.de
 [group:vars]
@@ -38,6 +40,23 @@ ansible_port=5985
 ansible_transport=kerberos
 ansible_winrm_scheme=http
 ansible_winrm_validation=ignore
+
+#### Windows Workgroups ####
+powershell:
+Set-Service -Name winrm -StartupType automatic
+start-service winrm
+Enable-WSManCredSSP -Role Server -Force
+netsh advfirewall firewall add rule name="__remote_management" dir=in action=allow protocol=TCP localport=5985
+
+[win_wg:vars]
+ansible_user=ansible
+ansible_password=password
+ansible_port=5985
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_transport=credssp
+
+### tmux ###
 
 .tmux.conf
 # remap prefix from 'C-b' to 'C-a'
@@ -52,8 +71,4 @@ unbind '"'
 unbind %
 
 set -g mouse on
-
-
-
-
   
