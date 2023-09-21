@@ -19,7 +19,7 @@
         path: ~/le-domain-ms.key
       register: file_data
 
-    - name: make letzengrypt account
+    - name: make domain key
       command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -out ~/le-domain-ms.key
       when: not file_data.stat.exists
       register: out                                                                                                                                                                            
