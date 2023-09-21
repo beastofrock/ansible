@@ -1,0 +1,26 @@
+---
+- name: playbook01
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: check if le-account-ms.key is there
+      stat:
+        path: ~/le-account-ms.key
+      register: file_data
+
+    - name: make letzengrypt account
+      command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -out ~/le-account-ms.key
+      when: not file_data.stat.exists
+      register: out
+    - debug: var=out.stdout_lines
+
+    - name: check if le-domain-ms.key is there
+      stat:
+        path: ~/le-domain-ms.key
+      register: file_data
+
+    - name: make letzengrypt account
+      command: openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -out ~/le-domain-ms.key
+      when: not file_data.stat.exists
+      register: out                                                                                                                                                                            
+    - debug: var=out.stdout_lines     
