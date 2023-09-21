@@ -1,0 +1,4 @@
+[linux]
+pc01
+[linux:vars]
+ansible_user=myuser
